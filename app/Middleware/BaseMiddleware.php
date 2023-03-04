@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 namespace App\Middleware;
 
+use App\Service\Tools;
 use Hyperf\Context\Context;
 use Hyperf\Contract\ContainerInterface;
 use Hyperf\Contract\TranslatorInterface;
@@ -27,7 +28,7 @@ class BaseMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (! envIsProduction()) {
+        if (! Tools::envIsProduction()) {
             // var_dump(date('Y-m-d H:i:s'), $params);
         }
         # 语言匹配

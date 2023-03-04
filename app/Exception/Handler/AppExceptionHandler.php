@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use App\Service\ServiceCode;
+use App\Service\Tools;
 use Hyperf\Context\Context;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
@@ -33,7 +34,7 @@ class AppExceptionHandler extends ExceptionHandler
         $result['data'] = [];
         $result['code'] = $throwable->getCode() === 0 ? ServiceCode::FAILURE : $throwable->getCode();
         $result['msg'] = $throwable->getMessage();
-        if (! $result['msg'] || envIsProduction()) {
+        if (! $result['msg'] || Tools::envIsProduction()) {
             $result['msg'] = ServiceCode::getMessage(ServiceCode::FAILURE);
         }
         $httpCode = 500;
